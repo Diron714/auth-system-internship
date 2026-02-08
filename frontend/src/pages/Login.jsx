@@ -78,7 +78,7 @@ export default function Login() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minWidth: "350px", // Maintains form shape when window is small
+            minWidth: "350px", 
             backgroundColor: "#fff"
           }}
         >
@@ -190,14 +190,14 @@ export default function Login() {
           </Container>
         </Grid>
 
-        {/* RIGHT SIDE: Fully Adjusted Section */}
+        
         <Grid
           item
           xs={6}
           sx={{
             display: "flex",
             height: "100%",
-            backgroundColor: "#f4f9f4" // Background color now applied to the whole grid
+            backgroundColor: "#f4f9f4" 
           }}
         >
           <Box 
@@ -208,7 +208,7 @@ export default function Login() {
               alignItems: "center",
               justifyContent: "center",
               textAlign: "center",
-              px: 6 // More horizontal padding for better text containment
+              px: 6 
             }}
           >
             <Box
