@@ -24,27 +24,20 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
 
- 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
- 
   const validateForm = () => {
     const newErrors = {};
-
     if (!email.trim()) {
       newErrors.email = "Email is required";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "Enter a valid email address";
     }
-
     if (!password.trim()) {
       newErrors.password = "Password is required";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -52,10 +45,8 @@ export default function Login() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     validateForm();
-    
   };
 
-  
   const googleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -73,43 +64,44 @@ export default function Login() {
         height: "100vh",
         width: "100vw",
         display: "flex",
-        overflow: "hidden",
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        overflow: "hidden"
       }}
     >
-      <Grid container sx={{ height: "100%", width: "100%" }}>
+      <Grid container sx={{ height: "100%" }} wrap="nowrap">
         
-        {/* LEFT SIDE */}
+        {/* LEFT SIDE: Form Section */}
         <Grid
           item
-          xs={12}
-          md={6}
+          xs={6}
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            minWidth: "350px", // Maintains form shape when window is small
+            backgroundColor: "#fff"
           }}
         >
           <Container maxWidth="xs">
             <Box>
               <Typography
-                variant="h3"
-                sx={{ fontWeight: 800, mb: 1, color: "#000" }}
+                variant="h4"
+                sx={{ 
+                  fontWeight: 800, 
+                  mb: 1, 
+                  color: "#000",
+                  fontSize: { xs: "1.8rem", md: "2.5rem" } 
+                }}
               >
                 Welcome back!
               </Typography>
 
-              <Typography
-                variant="body2"
-                sx={{ color: "#757575", mb: 4 }}
-              >
+              <Typography variant="body2" sx={{ color: "#757575", mb: 4 }}>
                 Simplify your workflow and boost your productivity with{" "}
                 <strong>Tuga’s App.</strong>
               </Typography>
 
               <Box component="form" onSubmit={handleLoginSubmit} noValidate>
-                
-                {/* EMAIL */}
                 <TextField
                   fullWidth
                   placeholder="Email"
@@ -127,7 +119,6 @@ export default function Login() {
                   }}
                 />
 
-                {/* PASSWORD */}
                 <TextField
                   fullWidth
                   placeholder="Password"
@@ -154,16 +145,8 @@ export default function Login() {
                   }}
                 />
 
-                <Box
-                  display="flex"
-                  justifyContent="flex-end"
-                  sx={{ mt: 1, mb: 3 }}
-                >
-                  <Link
-                    href="#"
-                    underline="none"
-                    sx={{ color: "#000", fontSize: "0.75rem", fontWeight: 800 }}
-                  >
+                <Box display="flex" justifyContent="flex-end" sx={{ mt: 1, mb: 3 }}>
+                  <Link href="#" underline="none" sx={{ color: "#000", fontSize: "0.75rem", fontWeight: 800 }}>
                     Forgot Password?
                   </Link>
                 </Box>
@@ -193,69 +176,65 @@ export default function Login() {
               </Divider>
 
               <Box display="flex" justifyContent="center" gap={2}>
-                <IconButton
-                  onClick={googleLogin}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    "&:hover": { backgroundColor: "#333" }
-                  }}
-                >
+                <IconButton onClick={googleLogin} sx={{ width: 45, height: 45, backgroundColor: "#000", color: "#fff", "&:hover": { backgroundColor: "#333" } }}>
                   <Google fontSize="small" />
                 </IconButton>
-
-                <IconButton sx={{ width: 50, height: 50, backgroundColor: "#000", color: "#fff" }}>
+                <IconButton sx={{ width: 45, height: 45, backgroundColor: "#000", color: "#fff" }}>
                   <Apple fontSize="small" />
                 </IconButton>
-
-                <IconButton sx={{ width: 50, height: 50, backgroundColor: "#000", color: "#fff" }}>
+                <IconButton sx={{ width: 45, height: 45, backgroundColor: "#000", color: "#fff" }}>
                   <Facebook fontSize="small" />
                 </IconButton>
               </Box>
-
-              <Typography
-                variant="body2"
-                textAlign="center"
-                sx={{ mt: 4, color: "#757575" }}
-              >
-                Not a member?{" "}
-                <Link
-                  href="#"
-                  underline="none"
-                  sx={{ color: "#2e7d32", fontWeight: 700 }}
-                >
-                  Register now
-                </Link>
-              </Typography>
             </Box>
           </Container>
         </Grid>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT SIDE: Fully Adjusted Section */}
         <Grid
           item
-          xs={false}
-          md={6}
+          xs={6}
           sx={{
-            display: { xs: "none", md: "flex" },
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#f4f9f4",
-            margin: "20px",
-            borderRadius: "40px"
+            display: "flex",
+            height: "100%",
+            backgroundColor: "#f4f9f4" // Background color now applied to the whole grid
           }}
         >
-          <Box textAlign="center" px={4}>
+          <Box 
+            sx={{ 
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              px: 6 // More horizontal padding for better text containment
+            }}
+          >
             <Box
               component="img"
               src="/illustration.png"
               alt="Illustration"
-              sx={{ width: "100%", maxWidth: "420px", mb: 4 }}
+              sx={{ 
+                width: "100%", 
+                maxWidth: "420px", 
+                height: "auto",
+                maxHeight: "55vh", 
+                objectFit: "contain",
+                mb: 4
+              }}
             />
 
-            <Typography variant="h4" sx={{ fontWeight: 800, color: "#000" }}>
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                fontWeight: 800, 
+                color: "#000",
+                maxWidth: "90%",
+                fontSize: { sm: "1.2rem", md: "1.8rem", lg: "2.2rem" },
+                lineHeight: 1.3
+              }}
+            >
               Make your work easier and organized with Tuga’s App
             </Typography>
           </Box>
